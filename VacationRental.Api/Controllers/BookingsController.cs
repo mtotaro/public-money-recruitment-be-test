@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using VacationRental.Api.Models;
+using VacationRental.Core.ViewModels;
+using VacationRental.Core.Models;
+using VacationRental.Api.Services.Interfaces;
 
 namespace VacationRental.Api.Controllers
 {
@@ -9,30 +11,30 @@ namespace VacationRental.Api.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
+        private readonly IBookingService _bookingService;
         private readonly IDictionary<int, RentalViewModel> _rentals;
         private readonly IDictionary<int, BookingViewModel> _bookings;
-
-        public BookingsController(
-            IDictionary<int, RentalViewModel> rentals,
-            IDictionary<int, BookingViewModel> bookings)
+        public BookingsController(IBookingService bookingService)
         {
-            _rentals = rentals;
-            _bookings = bookings;
+            _bookingService = bookingService;
         }
 
         [HttpGet]
         [Route("{bookingId:int}")]
         public BookingViewModel Get(int bookingId)
         {
-            if (!_bookings.ContainsKey(bookingId))
+            var bookingViewModel = _bookingService.GetBookingById(bookingId);
+
+            if (bookingViewModel != null)
                 throw new ApplicationException("Booking not found");
 
-            return _bookings[bookingId];
+            return bookingViewModel;
         }
 
         [HttpPost]
-        public ResourceIdViewModel Post(BookingBindingModel model)
+        public ResourceIdViewModel Post(BookingBindingModel model )
         {
+
             if (model.Nights <= 0)
                 throw new ApplicationException("Nigts must be positive");
             if (!_rentals.ContainsKey(model.RentalId))
