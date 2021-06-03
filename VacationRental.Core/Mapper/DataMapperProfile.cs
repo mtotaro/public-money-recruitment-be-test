@@ -12,8 +12,10 @@ namespace VacationRental.Core.Mapper
         public DataMapperProfile()
         {
             CreateMap<BookingDTO, BookingViewModel>().ReverseMap();
+            CreateMap<RentalDTO,  RentalViewModel>().ReverseMap();
+            CreateMap<CalendarDTO, CalendarViewModel>().ReverseMap();
 
-        
+
         }
     }
 }

@@ -32,6 +32,8 @@ namespace VacationRental.Api
             //services.AddSingleton<IDictionary<int, RentalViewModel>>(new Dictionary<int, RentalViewModel>());
             //services.AddSingleton<IDictionary<int, BookingViewModel>>(new Dictionary<int, BookingViewModel>());
             services.AddSingleton<IDataProvider<BookingDTO>, BookingRepository>();
+            services.AddSingleton<IDataProvider<RentalDTO>, RentalRepository>();
+            services.AddSingleton<IDataProvider<CalendarDTO>, CalendarRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
