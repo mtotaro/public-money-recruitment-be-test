@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VacationRental.Core.Data.DTO
 {
-    class RentalDTO
+    public class RentalDTO
     {
     }
 }
