@@ -1,4 +1,5 @@
-﻿using VacationRental.Core.ViewModels;
+﻿using VacationRental.Core.Models;
+using VacationRental.Core.ViewModels;
 
 namespace VacationRental.Api.Services.Interfaces
 {
@@ -10,5 +11,7 @@ namespace VacationRental.Api.Services.Interfaces
         /// <param name="id"></param>
         /// <returns>BookingViewModel</returns>
         BookingViewModel GetBookingById(int id);
+
+        int InsertBooking(BookingBindingModel bookingBindingModel);
     }
 }

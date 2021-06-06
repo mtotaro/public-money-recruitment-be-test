@@ -13,5 +13,11 @@ namespace VacationRental.Core.Services.Interfaces
         /// <param name="id"></param>
         /// <returns>CalendarViewModel</returns>
         CalendarViewModel GetCalendarById(int id);
+        /// <summary>
+        /// Get Rental Calendar by nights
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>CalendarViewModel</returns>
+        CalendarViewModel GetRentalCalendarByNights(int rentalId, DateTime start, int nights);
     }
 }

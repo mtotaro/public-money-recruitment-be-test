@@ -10,6 +10,9 @@ using VacationRental.Core.Mapper;
 using VacationRental.Core.Data.Interfaces;
 using VacationRental.Core.Data.DTO;
 using VacationRental.Core.Data.Repositories;
+using VacationRental.Core.Services;
+using VacationRental.Api.Services.Interfaces;
+using VacationRental.Core.Services.Interfaces;
 
 namespace VacationRental.Api
 {
@@ -29,11 +32,14 @@ namespace VacationRental.Api
 
             services.AddSwaggerGen(opts => opts.SwaggerDoc("v1", new Info { Title = "Vacation rental information", Version = "v1" }));
             services.AddAutoMapper(typeof(DataMapperProfile)); // assembly
-            //services.AddSingleton<IDictionary<int, RentalViewModel>>(new Dictionary<int, RentalViewModel>());
-            //services.AddSingleton<IDictionary<int, BookingViewModel>>(new Dictionary<int, BookingViewModel>());
+            services.AddSingleton<IDictionary<int, RentalDTO>>(new Dictionary<int, RentalDTO>());
+            services.AddSingleton<IDictionary<int, BookingDTO>>(new Dictionary<int, BookingDTO>());
             services.AddSingleton<IDataProvider<BookingDTO>, BookingRepository>();
             services.AddSingleton<IDataProvider<RentalDTO>, RentalRepository>();
             services.AddSingleton<IDataProvider<CalendarDTO>, CalendarRepository>();
+            services.AddSingleton<IBookingService, BookingService>();
+            services.AddSingleton<IRentalService, RentalService>();
+            services.AddSingleton<ICalendarService, CalendarService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +49,6 @@ namespace VacationRental.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
 
             app.UseMvc();
             app.UseSwagger();

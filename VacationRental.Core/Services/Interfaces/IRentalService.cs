@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VacationRental.Core.Data.DTO;
+using VacationRental.Core.Models;
 using VacationRental.Core.ViewModels;
 
 namespace VacationRental.Core.Services.Interfaces
@@ -13,5 +15,9 @@ namespace VacationRental.Core.Services.Interfaces
         /// <param name="id"></param>
         /// <returns>RetanlViewModel</returns>
         RentalViewModel GetRentalById(int id);
+        int InsertNewRental(RentalBindingModel rentalEntity);
+
+        RentalViewModel UpdateRental(RentalDTO rentalViewModel);
+
     }
 }

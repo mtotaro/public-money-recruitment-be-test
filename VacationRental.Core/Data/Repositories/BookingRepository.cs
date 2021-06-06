@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VacationRental.Core.Data.DTO;
 using VacationRental.Core.Data.Interfaces;
 
@@ -6,31 +7,40 @@ namespace VacationRental.Core.Data.Repositories
 {
     public class BookingRepository : IDataProvider<BookingDTO>
     {
-        //ACA VA LA LISTA QUE HACE DE BASE DE DATOS
+        private readonly IDictionary<int, BookingDTO> _bookings;
+
+        public BookingRepository(IDictionary<int, BookingDTO> bookings)
+        {
+            _bookings = bookings;
+        }
 
         public void Delete(BookingDTO entity)
         {
-            throw new System.NotImplementedException();
+            _bookings.Remove(entity.Id);
         }
 
         public IEnumerable<BookingDTO> Get()
         {
-            throw new System.NotImplementedException();
+            return _bookings.Values;
         }
 
         public BookingDTO Get(int id)
         {
-            throw new System.NotImplementedException();
+            return _bookings.TryGetValue(id, out var value) ? value : null;
         }
 
         public int Insert(BookingDTO entity)
         {
-            throw new System.NotImplementedException();
+            entity.Id = _bookings.Values.Count() + 1;
+            _bookings.Add(entity.Id, entity);
+
+            return entity.Id;
         }
 
         public BookingDTO Update(BookingDTO entity)
         {
-            throw new System.NotImplementedException();
+            _bookings[entity.Id] = entity;
+            return entity;
         }
     }
 }
