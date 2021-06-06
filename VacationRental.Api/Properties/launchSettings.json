@@ -7,7 +7,7 @@
       "sslPort": 0
     },
     "iisExpress": {
-      "applicationUrl": "http://localhost:58783",
+      "applicationUrl": "http://localhost:58783/swagger",
       "sslPort": 0
     }
   },
